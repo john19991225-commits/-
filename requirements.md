@@ -24,7 +24,7 @@
 | FR-11 | MUST 記錄 trace ID、輸入 hash、時間、版本、工具呼叫、規則命中、決策與人工結果 | trace schema + replay test |
 | FR-12 | MUST 顯示原始影像證據與抽取值，允許 reviewer approve/edit/reject | UI scenario test |
 | FR-13 | SHOULD 在允許的工具與最大步數內規劃，並有 timeout／retry-once／stop condition | planner state-transition tests |
-| FR-14 | MUST 提供 B0 純 OCR、B1 OCR+Rules、B2 OCR+Agent 的相同測試介面 | benchmark runner output |
+| FR-14 | MUST 提供 B0 人工輸入與人工核對、B1 OCR + Fixed Rules、B2 OCR + Domain AI Agent 的共同 test manifest 與公平評估介面；OCR metric 僅適用 B1/B2 | benchmark runner output |
 | FR-15 | MUST 將 Observed Results 與 Expected Outcomes 分開 | report review checklist |
 
 ## 3. Agent Contracts
@@ -128,4 +128,3 @@ README.md MUST 包含問題、RQ、範圍、架構、安裝、demo、dataset、e
 - 架構、流程、行號 pseudocode、dataset 與 experiment matrix 完整。
 - 2025–2026 search protocol 與已核對起始來源存在；未核對內容標「待查證」。
 - `project_plan.md`、`requirements.md`、`proposal_checklist.md` 交叉一致。
-

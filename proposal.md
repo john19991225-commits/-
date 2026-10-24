@@ -2,7 +2,7 @@
 
 ## Smart Warehouse AI Agent — 智慧倉儲單據辨識與庫存異常決策代理人
 
-> 文件版本：v0.1（第一至第三部分）  
+> 文件版本：v1.0（Final Project Proposal submission draft）
 > 更新日期：2026-10-24  
 > 文件狀態：Proposal；尚未執行模型訓練或正式實驗。本文所有未來效能敘述均屬 **Expected Outcomes**，不得解讀為 Observed Results。  
 > 查證聲明：文獻以出版社、正式論文頁面、官方資料集或標準組織為優先。僅取得摘要／metadata 者已在文獻表標註，未據此推論全文未揭露之細節。
@@ -29,9 +29,9 @@
 
 ### E. Experiments
 
-資料規劃分為三層：（1）SROIE 與 DocVQA 等公開資料用於 OCR／文件理解 pretest；（2）預計建立 300–500 張、至少三類單據與五種版型的去識別化中英倉儲單據；（3）建立與單據配對的 CSV／SQLite 庫存快照及具固定 seed 的異常情境。若實際資料量未達目標，將報告實際樣本數及限制。實驗以相同 OCR、資料切分與硬體比較 B0 純 OCR、B1 OCR + Rules、B2 OCR + Agent。評估包含 CER／WER、欄位 Precision／Recall／F1 與 Exact Match、異常 macro-F1／PR-AUC／誤報率／漏報率、錯誤自動通過率、適當升級率、evidence coverage、trace replay success、median／P95 latency 與峰值 RAM，並進行未見版型、影像劣化及元件消融實驗。
+資料規劃分為三層：（1）SROIE 與 DocVQA 等公開資料用於 OCR／文件理解 pretest；（2）預計建立 300–500 張、至少三類單據與五種版型的去識別化中英倉儲單據；（3）建立與單據配對的 CSV／SQLite 庫存快照及具固定 seed 的異常情境。若實際資料量未達目標，將報告實際樣本數及限制。實驗以相同 test manifest、gold labels、庫存快照與計時規則比較 B0 人工輸入與人工核對、B1 OCR + Fixed Rules、B2 OCR + Domain AI Agent；B1 與 B2 另共用相同 OCR、parser 與 rule version。評估包含 OCR 字元準確率、重要欄位 Exact Match、異常 Precision／Recall／F1、重複單據偵測、每張處理時間、人工介入比例、Agent 工具選擇與任務完成率。完整計算與空白結果表見 `experiments.md`；正式實驗目前為 Not Run。
 
-### F. Expected Outcomes
+### F. Expected Findings（Expected Outcomes）
 
 **Expected Outcomes：** 本研究預期建立一套由「文件辨識」延伸至「有證據的倉儲異常建議」之可重現架構；B2 預期在跨資料來源異常的召回、證據完整性及高風險案件升級方面優於 B0 與 B1，但可能增加延遲、記憶體與系統複雜度。預期學術貢獻是提出可測量的 OCR—Rules—Agent 比較框架；實務貢獻則是提供不直接寫入正式庫存、保留人工責任與稽核軌跡的學生級可行原型。上述均為待實驗驗證之預期，本文不宣稱已取得任何效能提升。
 
@@ -39,13 +39,13 @@
 
 # 第二部分　Introduction
 
-## 2.1 Attention Getter
+## 2.1 A. Attention Getter
 
 智慧倉儲的核心資產不只是貨架與自動化設備，也是能否反映實物流動的可靠資料。2025 Warehouse/DC Operations Survey 顯示，在其 101 位合格受訪者中，WMS 使用率達 87%，但以人工方式蒐集生產力資料者仍達 51%；76% 使用 inventory accuracy 指標，且受訪倉儲的平均 SKU 數增加至 9,565 [11]。這組結果不可外推至所有國家或產業，但它揭示一個具體矛盾：企業可能已具備 WMS，前端文件輸入、資料核對與指標生成仍依賴人工。當 SKU、供應商版型與作業量增加，單一錯字、漏欄或重複單據可能沿著收貨、上架、揀貨及出貨流程擴散。
 
 2025 年 IoT 倉儲系統性回顧也指出，既有研究偏重理論框架與演算法，真實部署仍不足 [6]；2026 年智慧倉儲回顧則進一步認為，技術、SKU 流程階段、階層決策與 KPI 之間仍缺少統一整合 [9]。這意味著「採用 AI」不等於完成倉儲決策閉環：系統仍需知道資料從何而來、規則適用於何種作業、何時應停止自動化，以及由誰承擔最終確認責任。
 
-## 2.2 Background
+## 2.2 B. Background
 
 倉儲單據通常同時具有視覺版面、文字、表格與業務語意。OCR 可輸出字元及位置；Key Information Extraction（KIE）則把文字映射為單號、日期、SKU、數量、單位、批號及效期等欄位。SROIE 將 scanned receipt processing 分成文字定位、文字辨識及關鍵資訊抽取三項任務 [4]，DocVQA 則把文件理解定義為對文件影像回答問題，並收錄 12,000 餘張文件影像與 50,000 個問題 [5]。兩者提供文件 AI 的可比較基礎，但並非臺灣倉儲單據或庫存決策資料，不能直接代表本專題的 domain performance。
 
@@ -53,17 +53,17 @@
 
 倉儲領域方面，收貨作業包含卸貨、檢查品質與數量差異，以及更新庫存；order picking 則需取得正確品項與數量 [8]。GS1 Logistic Label Guideline 規範 SSCC、GTIN、batch/lot 與日期等識別資訊，並指出 master data alignment、掃描與保存追溯關係的重要性 [10]。因此，本研究所稱 Domain Knowledge 不是讓語言模型自由生成「常識」，而是把可查證標準、專題政策與明確標示的研究假設轉成有 rule ID、版本、severity 與來源的規則。
 
-## 2.3 Problem
+## 2.3 C. Problem
 
 本研究聚焦以下可操作問題：倉儲人員收到影像或 PDF 單據後，需要辨識欄位、對照品項主檔與庫存快照、找出數量或識別異常、保留原始證據，並在不確定時要求補件或人工覆核。純 OCR 只提供文字；一般 WMS 假設輸入已結構化且正確；獨立異常偵測模型則通常從既有數值序列或表格開始。三者之間缺少一個安全且可稽核的連接層。
 
 具體錯誤情境包括：（1）同一供應商與單據類型下出現重複單號；（2）OCR 將相似 SKU 字元混淆；（3）出庫數量高於可用量；（4）單據明細合計與表頭合計不一致；（5）受批號或效期管理的品項缺少必要欄位；（6）單據、主檔與庫存列互相矛盾。此類問題需要同時取得視覺證據、資料庫紀錄與作業規則，不能由單一分類器或聊天介面完整處理。
 
-## 2.4 Existing Limitations
+## 2.4 D. Existing Limitations
 
 現有方法具有五項限制。第一，OCR error 會傳遞至欄位抽取與後續規則，且低解析、折痕、旋轉與複雜表格會增加錯誤；SROIE 所列的紙張、印刷、掃描與版面問題即反映此現象 [4]。第二，固定 rules 對已知欄位有效，卻不會自行取得缺少的上下文，也難以處理未見版型。第三，LLM 或 agent 雖具彈性，仍可能產生 unsupported claims、工具誤用、成本與延遲；AID-Agent 亦把複雜表格、跨頁關聯與成本列為挑戰 [2]。第四，倉儲 AI 研究常聚焦揀貨路徑、IoT、Digital Twin 或數值異常模型 [6]–[9]，對非結構化單據到具證據決策的端到端問題著墨較少。第五，若缺少 human gate 與 audit log，即使平均準確度良好，少數高風險錯誤仍可能被自動放行。NIST AI RMF 強調 human-AI roles、透明性、可追溯性與持續性風險管理 [12]，故本專題不以全自動化為目標。
 
-## 2.5 Innovation
+## 2.5 E. Innovation
 
 本專題創新性不建立在「發明新的 OCR 模型」，而在可測量的系統整合與責任邊界：
 
@@ -71,13 +71,13 @@
 2. **Evidence-first warehouse reasoning。** 每一異常與建議必須引用影像 bounding box、OCR span、inventory row ID 或 rule ID；缺少證據即不得形成自動通過建議。
 3. **版本化 Domain Knowledge。** 將 GS1 識別概念、倉儲數量一致性與專題政策寫成可測試規則，並清楚區分標準、組織政策及研究假設。
 4. **Risk × Confidence Human Gate。** 不只以 OCR confidence 判斷，而是綜合異常 severity、欄位信心、來源衝突與 evidence coverage 決定人工覆核。
-5. **公平三層 baseline。** 在相同 OCR、schema、split 與硬體下比較純 OCR、OCR + Rules、OCR + Agent，評估 agent orchestration 的實際增益與成本。
+5. **公平三層 baseline。** 三組共用相同 test set、gold labels、庫存快照與計時規則；B1 與 B2 再共用 OCR、parser 與 rules，比較人工流程、固定規則自動化及 Agent orchestration 的效益與成本。
 
 本研究不宣稱上述組合為全球首創；是否具有文獻上的新穎性，仍須在完整系統性檢索後確認，現階段此項標示為**待查證**。
 
 ### Research Questions
 
-- **RQ1：文件理解效能。** 在相同 OCR 與資料切分下，OCR + Rules 與 OCR + Agent 是否能比純 OCR 提升倉儲關鍵欄位的 Precision、Recall、F1 與 Exact Match？
+- **RQ1：文件處理效能。** 在相同 test set 與 gold labels 下，B0 人工流程、B1 OCR + Fixed Rules 與 B2 OCR + Domain AI Agent 的重要欄位 Exact Match、錯誤型態及處理時間有何差異？其中 OCR 字元準確率只適用於 B1/B2，自動化方案不得與人工轉錄混稱 OCR accuracy。
 - **RQ2：異常判斷效能。** Agent 使用唯讀庫存查詢與版本化 Domain Rules 後，是否能比非 Agent baseline 更準確偵測重複單據、未知 SKU、數量不一致、預估負庫存及批號／效期缺漏？
 - **RQ3：決策安全與可追溯性。** Evidence pointer、risk × confidence policy 與 Human-in-the-loop 是否能降低錯誤自動通過率，並提高 evidence coverage、適當升級率與 trace replay success？
 - **RQ4：可行性與代價。** 上述改善是否值得 Agent 帶來的 median／P95 latency、RAM、工具呼叫數與可能 API 成本？
@@ -92,7 +92,7 @@
 4. 在公平控制條件下比較 B0、B1、B2，除準確度外，同時衡量安全、稽核與資源成本。
 5. 形成可由教師、倉管人員或研究者追查每項決策依據的 append-only audit trail。
 
-## 2.6 Contributions
+## 2.6 F. Contributions
 
 預期貢獻如下，均須由後續實驗驗證：
 
@@ -174,7 +174,7 @@ GS1 Logistic Label Guideline 規範物流單元識別及資料交換，要求以
 
 ### Research Gap
 
-因此，本研究識別的缺口是：**缺少一個能由非結構化倉儲單據出發，主動取得庫存資料、套用版本化專業規則、為異常建議保留逐項證據，並依風險與信心交由人工確認的輕量 Domain AI Agent，以及對此 Agent 相較純 OCR 與 OCR + Rules 的公平評估。** 此缺口目前由本節文獻綜合推論而得；是否已有完全相同之系統，仍須擴充資料庫與關鍵詞進行系統性檢索，故「全球尚無同類系統」之命題標為**待查證**。
+因此，本研究識別的缺口是：**缺少一個能由非結構化倉儲單據出發，主動取得庫存資料、套用版本化專業規則、為異常建議保留逐項證據，並依風險與信心交由人工確認的輕量 Domain AI Agent，以及對人工流程、OCR + Fixed Rules 與 OCR + Domain AI Agent 的公平評估。** 此缺口目前由本節文獻綜合推論而得；是否已有完全相同之系統，仍須擴充資料庫與關鍵詞進行系統性檢索，故「全球尚無同類系統」之命題標為**待查證**。
 
 ### Our Project
 
@@ -208,7 +208,7 @@ Deep Research 以 Why、What-if、Trade-off、Failure Case、Evidence、Comparis
 
 - 異常 observation 與 root-cause hypothesis 必須分開。
 - 來源衝突不得 silent overwrite；應保留 candidates 與 evidence IDs。
-- B0／B1／B2 必須共用 OCR、schema、split 與硬體，另以 ablation 歸因 Agent 增益。
+- B0／B1／B2 必須共用 test manifest、gold labels、庫存快照與計時規則；B1／B2 共用 OCR、parser、rules 與硬體，另以 ablation 歸因 Agent 增益。
 - 新版型及影像劣化應提高監督，不得為維持 throughput 直接降低 threshold。
 - 人工核准與後續 correction 均須追加紀錄；原型維持 recommendation-only。
 
@@ -222,11 +222,37 @@ Deep Research 已轉換為十項初始規則：identifier priority、duplicate h
 
 ---
 
+# 第五部分　Proposed Scheme
+
+## 5.1 System Goal and Implementation Boundary
+
+本方案把單據輸入、OCR／欄位解析、庫存與歷史查詢、資料分析、倉儲規則、有限決策、人工確認及操作紀錄整合為 recommendation-only workflow。Target Design 允許 schema-constrained LLM 協助任務理解、規劃與證據摘要，但 OCR、SQL、數量運算、必要欄位、重複鍵、權限及決策 gate 必須由確定性工具或規則執行。MVP 目前使用 bounded rule-based planner；外部 LLM、Google Sheets、掃描 PDF renderer 與動態 replan 仍為 Planned，不得視為已實作功能。
+
+## 5.2 System Architecture
+
+架構採八個編號模組：① User/Application Scenario、② Query/Input、③ Planner & Reasoning Agent、④ Data Acquisition/Retrieval、⑤ Analytics Engine、⑥ Domain Knowledge Integration、⑦ Decision/Recommendation、⑧ Output & Interaction。完整可編輯 Mermaid 圖、各模組用途、輸入、輸出、格式、依賴與 failure handling 見 [architecture.md](architecture.md)。LLM／Agent、確定性規則、統計分析及人工責任的界線見 [DESIGN.md](DESIGN.md)。
+
+## 5.3 Processing Flow and Human Interaction
+
+流程為 Input → validation/preprocessing → OCR → typed parsing → inventory/history retrieval → duplicate/reconciliation analytics → versioned domain rules → confidence/evidence/risk gate → recommendation or Human Review → audit。OCR 失敗最多自動重試一次；缺少重要欄位、資料來源失效或過期、確認重複、庫存不一致、規則衝突、高風險或證據不足均進入人工流程。人工可在 Target Design 中 approve、edit、reject 或提供新證據後 reprocess；MVP 目前只完成 confirm-before-write。完整 Mermaid flowchart 見 [flowchart.md](flowchart.md)。
+
+## 5.4 Algorithm
+
+[algorithm.md](algorithm.md) 的 Algorithm 1 定義輸入 `q`、文件 `d`、唯讀資料來源 `s` 與政策 `p`，輸出含 fields、findings、risk、confidence、evidence IDs、human-review status 與 trace ID 的 `R`。92 行 pseudocode 涵蓋任務理解、bounded plan、工具選擇、OCR retry、欄位驗證、資料擷取、分析、規則推理、unsupported-claim gate、信心與風險、人工流程及 audit。`DESIGN.md` 與 `proposal_audit.md` 已分開標示已實作行為與 Planned 行為。
+
+## 5.5 Technical Feasibility
+
+MVP 使用 Python 3.11、Streamlit、SQLite、pandas、Pillow、pypdf 與可配置 Tesseract provider；API key 只允許由 `.env` 載入，`.env`、SQLite、uploads 與快取均由 `.gitignore` 排除。匿名合成資料路徑已通過六項 automated tests，但真實圖片 OCR、掃描 PDF、Google Sheets、LLM adapter、正式效能及 B0/B1/B2 實驗尚未完成。資料、baseline、公式、split 與空白結果表見 [experiments.md](experiments.md)。
+
+## 5.6 Verification and Limitations
+
+現有驗證只支持：合成 fixture 可完成解析、查詢、規則判斷、人工確認後寫入、重複寫入阻擋、缺欄／空檔／庫存不足／OCR dependency failure 的 fail-safe。它不支持任何真實 OCR 準確率、異常 F1、效率提升或 Agent 優越性主張。完整限制、風險、implementation mapping 與實驗安全邊界見 [DESIGN.md](DESIGN.md)、[README.md](README.md) 與 [proposal_audit.md](proposal_audit.md)。
+
 # References
 
 [1] L. Sun, L. He, S. Jia, Y. He, and C. You, “DocAgent: An Agentic Framework for Multi-Modal Long-Context Document Understanding,” in *Proceedings of EMNLP 2025*, pp. 17701–17716, 2025. DOI: [10.18653/v1/2025.emnlp-main.893](https://doi.org/10.18653/v1/2025.emnlp-main.893). 全文可取得／已檢視。
 
-[2] B. Li, J. Conen, and F. Aller, “AID-Agent: An LLM-Agent for Advanced Extraction and Integration of Documents,” in *Proceedings of the 1st Workshop for Research on Agent Language Models (REALM 2025)*, pp. 80–88, 2025. [ACL Anthology](https://aclanthology.org/2025.realm-1.6/). 全文可取得／已檢視；ACL 頁面未列 DOI，故不填寫 DOI。
+[2] B. Li, J. Conen, and F. Aller, “AID-Agent: An LLM-Agent for Advanced Extraction and Integration of Documents,” in *Proceedings of the 1st Workshop for Research on Agent Language Models (REALM 2025)*, pp. 80–88, 2025. DOI: [10.18653/v1/2025.realm-1.6](https://doi.org/10.18653/v1/2025.realm-1.6). [ACL Anthology](https://aclanthology.org/2025.realm-1.6/). 全文可取得／已檢視。
 
 [3] R. A. Principe, M. Viviani, and N. Chiarini, “Enhancing Information Extraction with Large Language Models: A Comparison with Human Annotation and Rule-Based Methods in a Real Estate Case Study,” in *Proceedings of the 5th Conference on Language, Data and Knowledge*, pp. 243–254, 2025. [ACL Anthology](https://aclanthology.org/2025.ldk-1.25/). 正式出版 metadata 與摘要已核對；本文未據此延伸未核對的實驗數值；ACL metadata 未列 DOI。
 

@@ -2,6 +2,10 @@
 
 可執行的學生級 Domain AI Agent 原型：接收單據、擷取文字、解析倉儲欄位、查詢 SQLite、檢查重複與庫存規則、輸出證據，並只在使用者確認後寫入測試資料庫。
 
+## 專題背景與目標
+
+本專題全名為 **Smart Warehouse AI Agent — 智慧倉儲單據辨識與庫存異常決策代理人**。研究問題不是只把文件轉成文字，而是探討如何結合 OCR、庫存資料、確定性倉儲規則、有限工具規劃、異常判斷、證據追溯與人工確認，形成可在一般學生電腦開發的 Domain AI Agent。正式實驗尚未執行；目前成果是 Proposal、Target Design、Experimental Protocol 與匿名合成資料 MVP。
+
 > 安全界線：只使用匿名／合成資料。請勿把真實敏感單據、`.env`、API key 或本機資料庫提交至版本控制。此 MVP 不連接正式 WMS/ERP。
 
 ## 已實作的端到端流程
@@ -19,7 +23,7 @@
   → test database write + append-only audit
 ```
 
-Agent 不是普通函式的包裝：`RuleBasedPlanner` 先判斷 RECEIPT／ISSUE／CHECK intent，再從 allowlist 選擇歷史、庫存、分析與規則工具；計畫有最大長度與越權檢查。OCR、SQL、Decimal 計算、重複鍵和倉儲規則本身仍是確定性工具，不宣稱為 LLM reasoning。
+目前 `RuleBasedPlanner` 會判斷 RECEIPT／ISSUE／CHECK intent，並以 allowlist 與最大長度限制工具計畫；但三種 intent 目前大多仍走相同七步流程，尚未完成依中間結果動態補查或 replan。因此，本版本應稱為 **bounded orchestration MVP**，不是完整自主 Agent。OCR、SQL、Decimal 計算、重複鍵和倉儲規則本身都是確定性工具，不宣稱為 LLM reasoning。
 
 ## Project Structure
 
@@ -169,3 +173,11 @@ python -m unittest discover -s tests -v
 實驗尚未執行，因此 `experiments.md` 的 Observed Results 保持空白，不得以設計目標、MVP 單元測試或 Expected Outcomes 代替正式比較結果。三組 baseline 必須共用凍結後的 test set、gold labels、inventory snapshot 與計時規則。
 
 目前環境沒有直接產生或人工檢視 PowerPoint 的工具；`proposal_slides.md` 保留了可轉換的 18 頁內容，可後續用 Marp、Pandoc 或人工貼入 PowerPoint，再由報告者檢查中文字型、Mermaid 圖與版面。
+
+## GitHub 與目前進度
+
+- Repository：<https://github.com/john19991225-commits/->
+- 已完成：Proposal 五部分、Deep Research 5/3/10、Architecture、Flowchart、Algorithm、Experimental Protocol、18 頁簡報原稿、合成資料 MVP 與 automated tests。
+- 部分完成：圖片 OCR provider、embedded-text PDF、bounded planner、SQLite audit。
+- Planned：真實／授權資料集、掃描 PDF、動態 Agent planning、Google Sheets、LLM adapter、正式 B0/B1/B2 實驗、PPTX 匯出、CI 與環境 lock。
+- Results：只有 automated test 結果；沒有正式 OCR、異常偵測或效率實驗結果。

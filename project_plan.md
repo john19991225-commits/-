@@ -81,15 +81,15 @@
 
 ## 4. 三種方案比較與 Baseline
 
-| 面向 | B0 純 OCR | B1 OCR + Rules | B2 OCR + Agent（本方案） |
+| 面向 | B0 人工輸入與人工核對 | B1 OCR + Fixed Rules | B2 OCR + Domain AI Agent（本方案） |
 |---|---|---|---|
-| 流程 | image → text | image → text → parser → fixed rules | planner 調用 OCR、parser、庫存、rules、evidence、review |
-| Domain Knowledge | 無 | 固定規則 | 版本化規則 + 任務規劃 + 缺資料處理 |
-| 跨來源判斷 | 無 | 預先寫死的比對 | 可依 state 選工具、收集證據與停止／升級 |
-| 輸出 | 原始文字 | 欄位與 rule hits | 有證據的建議、信心、風險及人工閘門 |
-| 可解釋／稽核 | 低 | 中 | 高，但必須驗證 trace 是否完整 |
-| 成本與風險 | 最低；不能決策 | 低至中；彈性有限 | 較高；有 hallucination、延遲與 prompt sensitivity |
-| 公平比較 | 同一 OCR、同一 split | 同一 OCR 與 schema | 同一 OCR、schema、資料與規則集；僅增加 agent orchestration |
+| 流程 | 人員讀取文件、輸入欄位並依相同政策核對 | image → OCR → parser → fixed rules | planner 調用 OCR、parser、庫存、rules、evidence、review |
+| Domain Knowledge | 由受訓人員依相同政策使用 | 固定規則 | 版本化規則 + 任務規劃 + 缺資料處理 |
+| 跨來源判斷 | 人工查詢與判斷 | 預先寫死的比對 | 可依 state 選工具、收集證據與停止／升級 |
+| 輸出 | 人工欄位、異常判定與處置 | 欄位與 rule hits | 有證據的建議、信心、風險及人工閘門 |
+| 可解釋／稽核 | 依人工表單與計時紀錄 | 中 | 高，但必須驗證 trace 是否完整 |
+| 成本與風險 | 人工時間高；可能有輸入與疲勞錯誤 | 低至中；彈性有限 | 較高；有 hallucination、延遲與 prompt sensitivity |
+| 公平比較 | 三組共用 test manifest、gold labels、庫存快照、政策與計時規則 | B1/B2 另共用 OCR、parser、rules 與硬體 | 相對 B1 只增加 Agent orchestration、evidence gate 與 escalation |
 
 ## 5. Proposed Scheme 與系統架構
 
@@ -289,4 +289,3 @@ README.md 應包含：研究問題、系統界線、架構圖、quick start、de
 - 規則被誤認為產業標準：每條標 source／owner／version；未有依據者標「專題假設」。
 - 個資與商業機密：資料最小化、去識別、禁止原始敏感影像上 Git。
 - 計算資源：優先 CPU 可跑的 OCR、pandas、SQLite、規則引擎；LLM 設為可插拔，不以昂貴 fine-tuning 為必要條件。
-

@@ -4,6 +4,8 @@
 > 稽核範圍：目前工作目錄內的 Markdown、Python、測試、設定、合成資料與 SQLite；另以出版社、ACL Anthology、IEEE、NIST、GS1 等原始頁面核對文獻。  
 > 證據原則：沒有本機檔案、程式執行結果或外部原始來源支持者，一律列為「未驗證」。本報告不把設計、Expected Outcomes 或單元測試視為正式實驗結果。
 
+> **後續修正紀錄：** 本報告原始評分保存為修正前基線。其後已補上 `proposal.md` Proposed Scheme、統一 B0/B1/B2 定義、補 AID-Agent DOI、修正 DR20 作者、更新 DESIGN/README 狀態並建立及推送 Git repository。尚未完成的動態 Agent、真實 OCR、正式實驗、PPTX、LICENSE/lock/CI 等判定仍有效；最新提交檢核以 `proposal_checklist.md` 為準。
+
 ## 一、總評與估計分數
 
 本專題的 Proposal 結構完整，研究問題、Deep Research、架構圖、例外流程與實驗 protocol 均高於一般初稿水準；MVP 也確實可執行。然而，最大扣分點是「完整 Agent 設計」與「目前程式實作」之間仍有明顯距離：現有 `RuleBasedPlanner` 對三種 intent 幾乎都產生相同七步流程，外部 LLM adapter、動態補查、freshness、risk × confidence、evidence coverage、重試迴圈與多數 audit invariants 尚未實作。因此，目前較精確的定位是 **可執行的 OCR/Parser + Rules + bounded orchestration MVP**，尚不能以程式證據證明完整 Domain AI Agent 已實現。

@@ -1,11 +1,23 @@
 # Smart Warehouse AI Agent — Proposed Scheme / Proposed Design
 
 > 版本：v0.1｜日期：2026-10-24  
-> 狀態：Proposal Design；尚未實作與驗證。任何效能描述均為目標或 Expected Outcome。
+> 狀態：Target Design + Partial MVP Implementation。第 11 節列出已實作與已測試範圍；其餘均為 Planned。正式 B0/B1/B2 實驗尚未執行，任何效能描述均為 Expected Outcome。
 
 ## 1. Design Goal and Scope
 
 本系統把倉儲單據辨識、庫存資料查詢、異常分析、領域規則與人工覆核串成具規劃能力的 Domain AI Agent。原型輸出 recommendation 與 evidence，不直接修改正式 WMS/ERP。主要 scenario 為收貨比對、出貨前檢查、盤點差異及重複單據偵測。
+
+### 1.1 Problem
+
+純 OCR 只能輸出文字，無法自行判斷重複單據、未知 SKU、出庫超量或倉儲政策缺漏；WMS 通常假設輸入已正確結構化。本設計處理從非結構化文件到具證據異常建議之間的安全連接問題。
+
+### 1.2 Requirements
+
+- 接受 JPG、PNG 或 PDF，抽取單號、日期、倉別、品項、數量與棧板型式。
+- 查詢 SQLite（Google Sheets 為 Planned），執行重複、欄位、數量與庫存規則。
+- Planner 只能選擇 allowlisted tools；高風險、低信心、衝突與錯誤必須 fail-safe。
+- 每項 finding 提供 evidence reference；測試資料庫寫入前必須人工確認。
+- API key 只由環境變數載入；不得使用真實敏感單據作公開 fixture。
 
 三份可編輯技術表示：
 
@@ -43,6 +55,8 @@ User/Task
 完整 Mermaid 圖見 [architecture.md](architecture.md)。
 
 ## 3. Agent Definition and Non-Agent Components
+
+本節同時定義 **Components、AI/Analytics 與 Domain Knowledge** 的責任邊界。③ Planner 是受限 orchestration；OCR、parser、SQL、analytics 與 rules 是可獨立測試的工具，不因被 Agent 呼叫就改稱 AI reasoning。
 
 ### 3.1 真正的 Agent 能力
 
@@ -133,7 +147,7 @@ Algorithm 1 見 [algorithm.md](algorithm.md)，涵蓋：任務理解、bounded p
 
 ## 7. Implementation Mapping
 
-建議 repository mapping：
+以下為 **Target Design / Planned repository mapping**，不是目前已全部存在的檔案；實際 MVP mapping 見第 11 節：
 
 ```text
 src/smart_warehouse_agent/
@@ -168,7 +182,7 @@ src/smart_warehouse_agent/
    └─ log.py                     # append-only JSONL
 ```
 
-| Design module | Implementation | Verification |
+| Design module | Planned implementation | Planned verification |
 |---|---|---|
 | ①–② | `app.py`, `schemas/task.py` | role/scenario/file validation tests |
 | ③ | `planner/state_machine.py`, `planner/policy.py` | state transition、loop、unauthorized-tool tests |
@@ -216,6 +230,18 @@ MVP 優先採 Python、PaddleOCR/Tesseract、Pydantic、pandas、SQLite、Stream
 - 目標電腦 CPU、RAM、median/P95 latency。
 
 上述均標為**待查證**；未完成前不得宣稱架構已達成效能或安全目標。
+
+### 10.1 Data Sources, Tools and Validation
+
+| Area | Current choice | Feasibility / validation |
+|---|---|---|
+| Documents | 匿名 UTF-8 fixture、JPG/PNG、embedded-text PDF | fixture 已測；真實 image/scanned PDF 待測 |
+| Structured data | SQLite | seed、query、unique constraint、audit 已測 |
+| UI | Streamlit | import smoke 已執行；瀏覽器人工測試待執行 |
+| OCR | pypdf / optional Tesseract | PDF path 已實作未自動測；Tesseract 只測 dependency failure |
+| Analytics | Python `Decimal`、pandas dependency | duplicate/SKU/availability 路徑已測；統計模組 Planned |
+| Agent | rule-based bounded planner | intent、allowlist、plan length 已有基本實作；dynamic replan Planned |
+| Domain knowledge | Python deterministic rules | 部分規則已測；versioned YAML、source mapping Planned |
 
 ## 11. MVP Implementation Status（2026-10-24）
 
@@ -283,3 +309,35 @@ python -m unittest discover -s tests -v
 ### 12.3 Experimental safety boundary
 
 截至 2026-10-24，正式 B0/B1/B2 實驗、真實掃描 OCR benchmark、使用者研究與統計檢定均為 **Not Run**。既有 6 個 automated tests 只證明合成 MVP 路徑與失敗保護可執行，不可作為準確率、效率或優越性結論。所有結果表必須維持空白，直到資料凍結、執行腳本與人工 adjudication 完成。
+
+## 13. How to Run
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python -m scripts.init_db
+python -m streamlit run app.py
+```
+
+完整環境變數、OCR provider 與測試命令見 [README.md](README.md)。Tesseract 為獨立系統依賴；未安裝時圖片 OCR 應明確失敗，不得回傳假結果。
+
+## 14. Results
+
+### 14.1 Observed Engineering Results
+
+- Python source 可編譯。
+- 6 個合成資料 automated tests 通過，涵蓋確認前不寫入、確認後寫入、重複阻擋、缺欄、空檔、出庫不足及 OCR dependency failure。
+- Streamlit import smoke 通過；瀏覽器互動未人工驗證。
+
+### 14.2 Research Results
+
+**Not Run。** CER、field Exact Match、異常 Precision／Recall／F1、重複偵測準確率、處理時間、人工介入、工具選擇與任務完成率均沒有 observed values。空白結果表見 [experiments.md](experiments.md)。
+
+## 15. Limitations
+
+- Planner 現階段主要是固定七步 bounded orchestration，尚未依中間結果動態選工具。
+- Parser 依賴明確欄名與列格式，不能代表任意供應商版型泛化能力。
+- 沒有掃描 PDF renderer、Google Sheets、外部 LLM、fuzzy duplicate、snapshot freshness、word-level bbox 或防竄改 audit ledger。
+- 規則仍為 Python MVP，尚未完成具 source/version 的 YAML/JSON policy repository。
+- 真實圖片 OCR、正式資料集、效能、人因、安全與 B0/B1/B2 實驗皆未完成。

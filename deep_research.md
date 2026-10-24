@@ -259,8 +259,8 @@ RFID tag 可能漏讀、遮蔽或在特定環境表現不穩；Rao et al. 稱此
 ## U6 — Comparison：為何必須保留 OCR + Rules baseline？
 
 - **問題：** 既然 Agent 較新，是否只需與純 OCR 比較？
-- **專業分析：** 若 Agent 與純 OCR 的差異同時包含 parser、rules、database query 與 model，無法知道增益來自哪一部分。B1 是重要控制組，能測量 deterministic domain logic 已能解決多少問題。
-- **可能答案：** B0、B1、B2 共用 OCR、schema、split 與硬體；B2 只增加 planning、adaptive tool use、evidence gate 與 escalation。
+- **專業分析：** 若 Agent 只與人工流程或單純 OCR 比較，差異同時包含 parser、rules、database query 與 planning，無法知道增益來自哪一部分。B1 是重要控制組，能測量 deterministic domain logic 已能解決多少問題。
+- **可能答案：** B0、B1、B2 共用 test manifest、gold labels、庫存快照與計時規則；B1 與 B2 共用 OCR、parser 與 rules，B2 才增加 planning、adaptive tool use、evidence gate 與 escalation。
 - **證據依據：** Principe et al. 直接比較 human、rule-based 與 LLM IE，指出多面向 trade-off [DR3]；AID-Agent 亦與 conventional extractors 比較 [DR2]。
 - **設計啟示：** 建立共同 benchmark runner，另做 remove-rule、remove-query、remove-evidence-gate ablations。
 
@@ -356,7 +356,7 @@ else:
 
 ## 4.4 可驗證研究假設
 
-- H1：加入欄位 schema 與 deterministic rules 的 B1，其 field validity 與已知異常 precision 將優於 B0；**Expected Outcome，待實驗**。
+- H1：B1 預期縮短相對 B0 人工流程的平均處理時間，但欄位 Exact Match 與異常 precision 是否優於人工必須實測；**Expected Outcome，待實驗**。
 - H2：加入 adaptive query、freshness check 與 evidence gate 的 B2，對跨來源異常的 recall 與 evidence coverage 將優於 B1；**Expected Outcome，待實驗**。
 - H3：risk-based human gate 將降低 false auto-accept，但提高 escalation rate 與 latency；**Expected Outcome，待實驗**。
 - H4：unseen-template 與 degraded-image 條件將使三方案效能下降，B2 是否更具韌性不預設答案。
@@ -367,7 +367,7 @@ else:
 
 [DR1] L. Sun et al., “DocAgent: An Agentic Framework for Multi-Modal Long-Context Document Understanding,” *EMNLP 2025*, 2025. DOI: [10.18653/v1/2025.emnlp-main.893](https://doi.org/10.18653/v1/2025.emnlp-main.893).
 
-[DR2] B. Li, J. Conen, and F. Aller, “AID-Agent: An LLM-Agent for Advanced Extraction and Integration of Documents,” *REALM 2025*, pp. 80–88, 2025. [ACL Anthology](https://aclanthology.org/2025.realm-1.6/).
+[DR2] B. Li, J. Conen, and F. Aller, “AID-Agent: An LLM-Agent for Advanced Extraction and Integration of Documents,” *REALM 2025*, pp. 80–88, 2025. DOI: [10.18653/v1/2025.realm-1.6](https://doi.org/10.18653/v1/2025.realm-1.6). [ACL Anthology](https://aclanthology.org/2025.realm-1.6/).
 
 [DR3] R. A. Principe, M. Viviani, and N. Chiarini, “Enhancing Information Extraction with Large Language Models: A Comparison with Human Annotation and Rule-Based Methods in a Real Estate Case Study,” *LDK 2025*, pp. 243–254, 2025. [ACL Anthology](https://aclanthology.org/2025.ldk-1.25/).
 
@@ -403,11 +403,11 @@ else:
 
 [DR19] J. Barratt, T. Kull, and A. Sodero, “Inventory Record Inaccuracy Dynamics and the Role of Employees within Multi-Channel Distribution Center Inventory Systems,” *Journal of Operations Management*, vol. 63, pp. 6–24, 2018. DOI: [10.1016/j.jom.2018.09.003](https://doi.org/10.1016/j.jom.2018.09.003). 作者名字與順序應由出版頁於最終 References 再次核對，現標為**待查證**。
 
-[DR20] M. A. Waller et al., “Inventory Record Inaccuracy: Causes and Labor Effects,” *Journal of Operations Management*, vols. 39–40, pp. 63–78, 2015. DOI: [10.1016/j.jom.2015.07.006](https://doi.org/10.1016/j.jom.2015.07.006). 作者完整名單應由出版頁於最終 References 再次核對，現標為**待查證**。
+[DR20] H. H.-C. Chuang and R. Oliva, “Inventory Record Inaccuracy: Causes and Labor Effects,” *Journal of Operations Management*, vols. 39–40, pp. 63–78, 2015. DOI: [10.1016/j.jom.2015.07.006](https://doi.org/10.1016/j.jom.2015.07.006). 作者、題名、期刊、頁碼與 DOI 已由出版者頁面核對。
 
 ## 待查證項目總表
 
-1. DR7、DR17、DR19、DR20 的完整作者 metadata 與可取得全文範圍。
+1. DR7 的完整作者 metadata 與全文範圍，以及 DR17、DR19 的 References 格式化仍待最後複核；DR20 metadata 已核對完成。
 2. 本地倉儲對 batch、expiry、高價品、snapshot freshness 及負庫存的實際政策。
 3. 自製資料規模、類別分布、標註一致性與授權。
 4. Human review 的可接受 workload、automation bias 與 reviewer agreement。

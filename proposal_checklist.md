@@ -1,7 +1,7 @@
 # Proposal 評分檢核表
 
 > 專題：Smart Warehouse AI Agent  
-> 使用方式：`[ ]` 未完成、`[~]` 進行中、`[x]` 已有可驗證證據。Proposal v0.1 的規劃存在不等於實驗完成。
+> 使用方式：`[ ]` 未完成、`[~]` 部分完成／待人工確認、`[x]` 已有可驗證證據。Proposal v1.0 的規劃存在不等於實驗完成。
 
 ## 一、Introduction — 20%
 
@@ -19,7 +19,7 @@
 
 - [x] 規劃 OCR/KIE、document understanding、agentic document AI、inventory anomaly、human oversight 五類。
 - [x] 起始來源包含可追溯的 ACL、IEEE、NIST、GS1 與資料集官方頁面。
-- [x] 方案比較涵蓋純 OCR、OCR + Rules、OCR + Agent。
+- [x] 方案比較已統一為 B0 人工輸入與人工核對、B1 OCR + Fixed Rules、B2 OCR + Domain AI Agent。
 - [x] 已建立 Article Summary Table：任務、方法、domain knowledge、dataset、findings、限制。
 - [~] DOI、作者、venue、年份與頁碼已多數由原始來源整理；標示「待查證」者仍須逐筆人工複核。
 - [x] 將 peer-reviewed、preprint、標準與產業／官方資料清楚標示來源類型。
@@ -47,8 +47,8 @@
 - [x] Planner 定義 state、allowed tools、step limit 與 stop conditions。
 - [x] 每個 Tool 均有用途、輸入、輸出與驗證方法。
 - [x] Reasoning 採 evidence-first，不保存或要求隱藏思考過程。
-- [x] Domain Knowledge 使用可版本化規則與來源欄位。
-- [x] Decision 使用 risk × confidence，並有 human gate。
+- [~] Target Design 定義可版本化規則與來源欄位；MVP 仍是 Python hard-coded rules，YAML/JSON policy repository 待實作。
+- [~] Target Design 使用 risk × confidence × evidence coverage；MVP 只以 findings 與最低 OCR confidence 作簡化 gate。
 - [x] 明定 recommendation-only，不直接寫回正式庫存。
 - [x] 有 evidence pointer、trace ID、input hash 與 append-only audit log 設計。
 - [ ] 完成 decision table 的數值門檻；以 validation set 調整並在 test 前凍結。
@@ -68,7 +68,7 @@
 - [ ] 以真實目標電腦記錄 CPU/RAM/OS 並完成 30–50 張 pilot benchmark。
 - [~] 已規劃 group split、seed、primary metric 與 exclusion criteria；尚未經教師確認及凍結 manifest。
 - [ ] 實驗執行後只在 Observed Results 填實測值、CI 與 error analysis。
-- [ ] 若未執行，所有敘述維持 `Expected Outcomes`。
+- [x] 未執行的正式實驗均維持 `Expected Outcomes`／`Not Run`，結果表為空白。
 
 **得分 Gate：** 一般學生電腦能做出 MVP；任一結果都能由固定資料、設定與程式重現。
 
@@ -81,7 +81,7 @@
 - [x] 已建立實際專案 folders、README.md、DESIGN.md 與可執行 MVP。
 - [~] 已加入 `.gitignore`；LICENSE、environment lock 與完整資料／模型授權清單仍待補。
 - [x] 已加入匿名合成 sample、測試方式與重現指令；contribution 規則待 GitHub 階段補充。
-- [ ] 確認 Git history 不含個資、金鑰或未授權文件。
+- [x] 已建立 Git repository 並推送；tracked files 不含 `.env`、SQLite、快取或掃描到的秘密字串。完整 history 仍應於每次提交前重查。
 
 **得分 Gate：** 新使用者依 README 能理解、安裝與重現；DESIGN 能解釋重要決策與限制。
 
@@ -89,13 +89,13 @@
 
 | 區塊 | 權重 | 自評（完成正式 Proposal 時填） | Evidence link |
 |---|---:|---:|---|
-| Introduction | 20 | — | `proposal.md` |
-| Related Work | 20 | — | `proposal.md` |
-| Deep Research | 20 | — | `deep_research.md`；完整 research log 尚待建立 |
-| Proposed AI Agent | 20 | — | `DESIGN.md` |
-| Flowchart/Pseudocode/Feasibility | 15 | — | `architecture.md`, `flowchart.md`, `algorithm.md`, `experiments.md` |
-| GitHub/DESIGN.md | 5 | — | `README.md`, `DESIGN.md` |
-| **Total** | **100** | **—** | |
+| Introduction | 20 | 符合 | `proposal.md` Abstract、第二部分；baseline 已統一 |
+| Related Work | 20 | 部分符合 | `proposal.md` 第三部分；DR7 作者與完整 search log 待補 |
+| Deep Research | 20 | 部分符合 | `deep_research.md`；5/3/10 完成，claim-level ledger 待補 |
+| Proposed AI Agent | 20 | 部分符合 | `proposal.md` 第五部分、`DESIGN.md`、`architecture.md`；完整動態 Agent 為 Planned |
+| Flowchart/Pseudocode/Feasibility | 15 | 部分符合 | `flowchart.md`、`algorithm.md`、`experiments.md`；真實 OCR／正式實驗未執行 |
+| GitHub/DESIGN.md | 5 | 大致符合 | `README.md`、`DESIGN.md`、source、tests；LICENSE/lock/CI 待補 |
+| **Total** | **100** | **Proposal 可繳交；Final Results 未完成** | `proposal_audit.md` |
 
 下列任一情況視為提交阻擋：
 
@@ -118,7 +118,7 @@
 
 | 狀態 | 項目 | 證據／下一步 |
 |---|---|---|
-| 已完成 | Proposal 第一至三部分與集中 References | `proposal.md` |
+| 已完成 | Proposal Abstract、Introduction、Related Work、Deep Research、Proposed Scheme 與集中 References | `proposal.md` |
 | 已完成 | 5 Mindsets、3 Controversies、10 Questions | `deep_research.md` |
 | 已完成 | Agent architecture、flowchart、逐行 pseudocode | `architecture.md`、`flowchart.md`、`algorithm.md` |
 | 已完成 | 三 baseline、指標公式、公平比較與空白結果表 | `experiments.md`；狀態為 Not Run |
@@ -131,7 +131,7 @@
 | 未完成 | 正式 B0/B1/B2 實驗與統計比較 | 結果表保持空白，不得填 Expected 值 |
 | 未完成 | 30–50 張 pilot 與真實目標電腦 benchmark | 記錄 CPU/RAM/OS、median/P95、錯誤案例 |
 | 未完成 | PPTX 匯出與人工版面檢查 | 以 `proposal_slides.md` 轉換後檢查字型、圖表與引用 |
-| 未完成 | Git repository、CI、LICENSE 與 immutable history audit | 目前目錄非 Git repository |
+| 部分完成 | GitHub repository | `main` 已推送；CI、LICENSE、environment lock 與 immutable history audit 待補 |
 | 需人工確認 | primary endpoint、樣本數、60/20/20 split、seed、排除條件 | 指導教師核准後才可 preregister/freeze |
 | 需人工確認 | 高風險規則、庫存 freshness 與 confidence 門檻 | 倉儲 domain reviewer 簽核 |
 | 需人工確認 | 人工 baseline 操作者、同意程序及隱私政策 | 研究倫理／課程要求確認 |
@@ -139,4 +139,4 @@
 
 ### 提交判定
 
-目前可提交作為 **Proposal 與 Experimental Protocol 草稿**，不可標示為完成實驗的 Final Results。正式送出前至少必須完成文獻待查證清理、教師／domain reviewer 簽核、資料與評估 protocol 凍結，以及 PPTX 人工檢查。
+目前可提交作為 **Final Project Proposal submission draft 與 Experimental Protocol**，不可標示為完成實驗的 Final Results。正式送出前仍需教師／domain reviewer 簽核、處理剩餘文獻待查證、確認資料與評估 protocol，並將 Markdown 投影片轉檔及人工檢查；若課程本階段只要求 Proposal，正式實驗可保留為 Not Run。
