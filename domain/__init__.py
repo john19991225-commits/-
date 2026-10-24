@@ -1,0 +1,2 @@
+"""Warehouse domain rules."""
+
