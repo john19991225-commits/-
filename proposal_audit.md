@@ -89,12 +89,12 @@
 | Ref. | 查核結果 | 判定與問題 |
 |---|---|---|
 | [1]/DR1 DocAgent | ACL Anthology 的作者、EMNLP 2025、頁碼與 DOI `10.18653/v1/2025.emnlp-main.893` 相符 | 已驗證 |
-| [2]/DR2 AID-Agent | 題名、作者、REALM 2025、80–88 相符；但 ACL 頁面**有** DOI `10.18653/v1/2025.realm-1.6` | 文獻存在；Proposal「ACL 未列 DOI」錯誤，須修正 |
+| [2]/DR2 AID-Agent | 題名、作者、REALM 2025、80–88 與 DOI `10.18653/v1/2025.realm-1.6` 相符 | 已驗證；先前 DOI 遺漏誤述已修正 |
 | [3]/DR3 Principe et al. | ACL Anthology metadata 與 243–254 相符，頁面沒有 DOI | 已驗證 |
 | [4]/DR4 SROIE | DOI `10.1109/ICDAR.2019.00244`、作者與頁碼相符 | 已驗證 |
 | [5]/DR5 DocVQA | DOI `10.1109/WACV48630.2021.00225`、12,000+ images、50,000 questions 相符 | 已驗證 |
 | [6]/DR6 IoT warehouse review | ScienceDirect 題名、Procedia CS 253、1236–1245、DOI `10.1016/j.procs.2025.01.185` 相符 | 已驗證 |
-| [7]/DR7 inventory anomaly | IEEE 頁面確認題名、會議、DOI、12,358 SKUs 與摘要所稱 F1 87.3% | 數據為「摘要報告」可引用；作者及全文仍未驗證，現有標示適當 |
+| [7]/DR7 inventory anomaly | DOI registry 確認作者為 Chunhua Xu、Wei Zhao、Zhiwei Fu，並確認題名、年份與 DOI；IEEE 摘要報告 12,358 SKUs 與 F1 87.3% | Metadata 已驗證；數據只能標為「摘要報告」，全文、split 與泛化細節仍待查證 |
 | [8]/DR8 AI order picking | 題名、四位作者、期刊、頁碼與 DOI `10.1007/s11846-025-00858-1` 相符 | 已驗證 |
 | [9]/DR9 smart warehousing | ScienceDirect 確認 2026、vol. 19、100340、DOI `10.1016/j.clscn.2026.100340` | 已驗證 |
 | [10]/DR10 GS1 | 官方頁確認 Release 1.3、Ratified、July 2019 | 已驗證 |
@@ -108,9 +108,9 @@
 | DR17 Rao et al. | Wiley 確認 DOI `10.1111/jbl.12232`；完整作者為 S. Rao, S. C. Ellis, T. J. Goldsby, D. Raju | 已驗證；應補完整作者 |
 | DR18 Bertolini et al. | DOI `10.3233/RFT-150069`、作者及題名相符 | 已驗證 |
 | DR19 Barratt et al. | Wiley 確認作者為 Mark Barratt, Thomas J. Kull, Anníbal Camara Sodero，DOI 與頁碼相符 | 已驗證；目前 initials 過度簡化但非虛構 |
-| DR20 | DOI `10.1016/j.jom.2015.07.006` 與題名存在，但正確作者是 **Howard Hao-Chun Chuang、Rogelio Oliva** | **引用作者錯置**；目前的 M. A. Waller et al. 必須移除 |
+| DR20 | DOI `10.1016/j.jom.2015.07.006`、題名及作者 Howard Hao-Chun Chuang、Rogelio Oliva 相符 | 已驗證；先前作者錯置已修正 |
 
-查核結論：未發現明確「虛構 DOI」，但發現一筆 DOI 遺漏誤述（AID-Agent）及一筆 DOI—作者錯置（DR20）。在修正前，不可宣稱所有 References 已完成逐筆驗證。
+查核結論（2026-10-31 更新）：正式 Proposal／Deep Research 的既知 DOI 遺漏與作者錯置均已修正；README 另發現並移除數筆無法解析或與題名不符的舊 metadata，現已與 `proposal.md` 的查核版本一致。[7] 的作者與 DOI 已核對，但全文、資料切分及泛化細節仍待查證。不得把僅摘要可得的 F1 數值當成本專題 baseline 或實驗成果。
 
 主要查核來源：[ACL DocAgent](https://aclanthology.org/2025.emnlp-main.893/)、[ACL AID-Agent](https://aclanthology.org/2025.realm-1.6/)、[IEEE inventory anomaly](https://ieeexplore.ieee.org/abstract/document/11139221/)、[ScienceDirect IoT review](https://www.sciencedirect.com/science/article/pii/S1877050925001930)、[GS1 guideline](https://ref.gs1.org/guidelines/logistic-label/1.3.0/)、[2025 Warehouse/DC survey](https://www.scmr.com/article/2025-warehouse-dc-operations-survey-tech-adoption-marches-on)、[NIST AI RMF](https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10)、[Wiley DR20](https://onlinelibrary.wiley.com/doi/10.1016/j.jom.2015.07.006)。
 

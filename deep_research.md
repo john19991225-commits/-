@@ -377,7 +377,7 @@ else:
 
 [DR6] A. Puga Mendoza, J. L. Caballero Chávez, and R. Torres Mendoza, “Applications and Methodologies of Internet of Things in Warehouses and Inventory Management: A Systematic Literature Review,” *Procedia Computer Science*, vol. 253, pp. 1236–1245, 2025. DOI: [10.1016/j.procs.2025.01.185](https://doi.org/10.1016/j.procs.2025.01.185).
 
-[DR7] 作者名單**待查證**, “Research on Abnormal Inventory Detection Algorithm in Warehouse Management System,” *ICAIEM 2025*. DOI: [10.1109/ICAIEM66060.2025.11139221](https://doi.org/10.1109/ICAIEM66060.2025.11139221). 僅摘要與 metadata 已核對。
+[DR7] C. Xu, W. Zhao, and Z. Fu, “Research on Abnormal Inventory Detection Algorithm in Warehouse Management System,” *ICAIEM 2025*. DOI: [10.1109/ICAIEM66060.2025.11139221](https://doi.org/10.1109/ICAIEM66060.2025.11139221). 作者、題名、年份與 DOI 已核對；僅取得摘要／metadata，全文細節待查證。
 
 [DR8] F. Fakhrai Rad, P. Oghazi, İ. Onur, and A. Kordestani, “Adoption of AI-Based Order Picking in Warehouse: Benefits, Challenges, and Critical Success Factors,” *Review of Managerial Science*, vol. 19, pp. 3495–3540, 2025. DOI: [10.1007/s11846-025-00858-1](https://doi.org/10.1007/s11846-025-00858-1).
 

@@ -90,7 +90,7 @@
 | 區塊 | 權重 | 自評（完成正式 Proposal 時填） | Evidence link |
 |---|---:|---:|---|
 | Introduction | 20 | 符合 | `proposal.md` Abstract、第二部分；baseline 已統一 |
-| Related Work | 20 | 部分符合 | `proposal.md` 第三部分；DR7 作者與完整 search log 待補 |
+| Related Work | 20 | 大致符合 | `proposal.md` 第三部分；DR7 作者／DOI 已核對，但全文與完整 search log 待補 |
 | Deep Research | 20 | 部分符合 | `deep_research.md`；5/3/10 完成，claim-level ledger 待補 |
 | Proposed AI Agent | 20 | 部分符合 | `proposal.md` 第五部分、`DESIGN.md`、`architecture.md`；完整動態 Agent 為 Planned |
 | Flowchart/Pseudocode/Feasibility | 15 | 部分符合 | `flowchart.md`、`algorithm.md`、`experiments.md`；真實 OCR／正式實驗未執行 |
@@ -114,7 +114,7 @@
 - [ ] 工程負責人：版本、測試、資源需求、failure handling 可重現。
 - [ ] 指導教師／domain reviewer：規則來源、severity、人工權限與限制合理。
 
-## 九、本次 Quality Check（2026-10-24）
+## 九、本次 Quality Check（2026-10-31）
 
 | 狀態 | 項目 | 證據／下一步 |
 |---|---|---|
@@ -122,7 +122,8 @@
 | 已完成 | 5 Mindsets、3 Controversies、10 Questions | `deep_research.md` |
 | 已完成 | Agent architecture、flowchart、逐行 pseudocode | `architecture.md`、`flowchart.md`、`algorithm.md` |
 | 已完成 | 三 baseline、指標公式、公平比較與空白結果表 | `experiments.md`；狀態為 Not Run |
-| 已完成 | 18 頁投影片內容、建議圖表與逐頁講稿 | `proposal_slides.md` |
+| 已完成 | 正式 18 頁 Proposal PPTX、原生架構／流程圖、引用與逐頁講稿 | `presentations/Smart_Warehouse_AI_Agent_Proposal.pptx`、`proposal_slides.md` |
+| 已完成 | PPTX 實際渲染驗證與 PDF 預覽 | Microsoft PowerPoint 2024 成功輸出 `presentations/Smart_Warehouse_AI_Agent_Proposal.pdf` |
 | 已完成 | 匿名合成 MVP 路徑與 6 個 automated tests | `README.md` 測試紀錄；不代表正式實驗結果 |
 | 部分完成 | 文獻 metadata 與 claim-level evidence audit | 逐筆處理所有「待查證」，補 `research_log.md` |
 | 部分完成 | 圖片／PDF OCR | embedded-text PDF 已實作；掃描 PDF 與本機 Tesseract 實測待完成 |
@@ -130,7 +131,8 @@
 | 部分完成 | Security evaluation | 風險已設計；prompt injection、tool misuse 測試案例待建立 |
 | 未完成 | 正式 B0/B1/B2 實驗與統計比較 | 結果表保持空白，不得填 Expected 值 |
 | 未完成 | 30–50 張 pilot 與真實目標電腦 benchmark | 記錄 CPU/RAM/OS、median/P95、錯誤案例 |
-| 未完成 | PPTX 匯出與人工版面檢查 | 以 `proposal_slides.md` 轉換後檢查字型、圖表與引用 |
+| 已完成 | PPTX 匯出與程式／視覺版面檢查 | 18 頁、zip/XML 完整、PowerPoint 可開啟並渲染；架構、流程、演算法、References 頁已抽樣視覺檢查 |
+| 需人工確認 | 封面姓名、課程、指導教師與校系格式 | PPTX 保留明確填寫欄位；繳交前由專題成員補齊 |
 | 部分完成 | GitHub repository | `main` 已推送；CI、LICENSE、environment lock 與 immutable history audit 待補 |
 | 需人工確認 | primary endpoint、樣本數、60/20/20 split、seed、排除條件 | 指導教師核准後才可 preregister/freeze |
 | 需人工確認 | 高風險規則、庫存 freshness 與 confidence 門檻 | 倉儲 domain reviewer 簽核 |
@@ -139,4 +141,13 @@
 
 ### 提交判定
 
-目前可提交作為 **Final Project Proposal submission draft 與 Experimental Protocol**，不可標示為完成實驗的 Final Results。正式送出前仍需教師／domain reviewer 簽核、處理剩餘文獻待查證、確認資料與評估 protocol，並將 Markdown 投影片轉檔及人工檢查；若課程本階段只要求 Proposal，正式實驗可保留為 Not Run。
+目前可提交作為 **Final Project Proposal 與 Experimental Protocol**，不可標示為完成實驗的 Final Results。正式送出前仍需教師／domain reviewer 簽核、處理剩餘全文待查證項目，並確認資料與評估 protocol；若課程本階段只要求 Proposal，正式實驗可保留為 Not Run。
+
+## 十、正式繳交四項文件矩陣（2026-10-31）
+
+| Required item | Status | Verifiable evidence | Remaining manual action |
+|---|---|---|---|
+| Proposal Document | **完成** | `proposal.md`；README 首頁亦完整呈現 Abstract → References | 教師若要求 DOCX/PDF，需依校系模板另行排版 |
+| Proposal PPT | **完成** | `presentations/Smart_Warehouse_AI_Agent_Proposal.pptx`（18 頁）及渲染 PDF | 填寫組員、課程、指導教師；口試前最後人工播放 |
+| GitHub Repository | **完成** | `main` branch；README、source、tests、documents、presentations | 每次提交前持續做 secret scan；不得加入真實敏感單據 |
+| DESIGN.md | **完成（含 Planned 邊界）** | `DESIGN.md`：Problem、Requirements、Architecture、Data Flow、AI/Analytics、Algorithm、Mapping、Run、Results、Limitations | Planned 模組及正式實驗不能誤標為 Implemented |

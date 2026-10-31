@@ -109,7 +109,7 @@
 
 本節選取 10 篇核心研究文獻，其中 5 篇屬 AI Technology（[1]–[5]），5 篇屬 Warehouse Domain Knowledge（[6]–[9]、[13]），比例各半。優先納入 2025–2026 年正式出版研究；較早的 SROIE 與 DocVQA 僅用作 benchmark 基礎。另以 GS1 Guideline [10] 補充領域標準、2025 產業調查 [11] 說明實務背景、NIST AI RMF [12] 支持可信任與人工監督設計，三者不列入上述十篇研究文獻的比例計算。
 
-證據狀態分為：（a）**全文可取得／已檢視**：可摘要方法、資料與作者明示限制；（b）**僅摘要與 metadata 已核對**：只陳述摘要明示內容，不推論全文；（c）**官方標準全文已檢視**。截至 2026-10-24，[7] 的 IEEE 頁面僅能取得摘要及部分頁面，其作者名單與全文實驗細節標示為**待查證**。
+證據狀態分為：（a）**全文可取得／已檢視**：可摘要方法、資料與作者明示限制；（b）**僅摘要與 metadata 已核對**：只陳述摘要明示內容，不推論全文；（c）**官方標準全文已檢視**。截至 2026-10-31，[7] 的作者、題名、年份與 DOI 已由 DOI registry 核對；但僅取得摘要／metadata，全文實驗細節仍標示為**待查證**。
 
 ## 3.2 AI Technology
 
@@ -262,7 +262,7 @@ MVP 使用 Python 3.11、Streamlit、SQLite、pandas、Pillow、pypdf 與可配�
 
 [6] A. Puga Mendoza, J. L. Caballero Chávez, and R. Torres Mendoza, “Applications and Methodologies of Internet of Things in Warehouses and Inventory Management: A Systematic Literature Review,” *Procedia Computer Science*, vol. 253, pp. 1236–1245, 2025. DOI: [10.1016/j.procs.2025.01.185](https://doi.org/10.1016/j.procs.2025.01.185). 正式出版 metadata、摘要與會議作者資料已核對；本文未假稱已逐頁審讀全文。
 
-[7] 作者名單**待查證**, “Research on Abnormal Inventory Detection Algorithm in Warehouse Management System,” in *2025 International Conference on Artificial Intelligence and Engineering Management (ICAIEM)*, 2025. DOI: [10.1109/ICAIEM66060.2025.11139221](https://doi.org/10.1109/ICAIEM66060.2025.11139221). 僅 IEEE 摘要與出版 metadata 已核對；未宣稱已閱讀全文。
+[7] C. Xu, W. Zhao, and Z. Fu, “Research on Abnormal Inventory Detection Algorithm in Warehouse Management System,” in *2025 International Conference on Artificial Intelligence and Engineering Management (ICAIEM)*, 2025. DOI: [10.1109/ICAIEM66060.2025.11139221](https://doi.org/10.1109/ICAIEM66060.2025.11139221). 作者、題名、年份與 DOI 已由 DOI registry 核對；僅取得摘要／metadata，未宣稱已閱讀全文。
 
 [8] F. Fakhrai Rad, P. Oghazi, İ. Onur, and A. Kordestani, “Adoption of AI-Based Order Picking in Warehouse: Benefits, Challenges, and Critical Success Factors,” *Review of Managerial Science*, vol. 19, pp. 3495–3540, 2025. DOI: [10.1007/s11846-025-00858-1](https://doi.org/10.1007/s11846-025-00858-1). 全文開放取得／已檢視。
 
@@ -280,7 +280,7 @@ MVP 使用 Python 3.11、Streamlit、SQLite、pandas、Pillow、pypdf 與可配�
 
 ## 待查證清單
 
-1. [7] 的完整作者名單、全文、資料切分、異常標註方式、baseline、公平比較及 production deployment 細節。
+1. [7] 的全文、資料切分、異常標註方式、baseline、公平比較及 production deployment 細節；作者與 DOI metadata 已核對。
 2. 自製資料能否達到 300–500 張、至少三類文件與五種版型；取得授權與去識別程序尚未執行。
 3. 各品項是否強制管理 batch／lot 或 expiry，以及效期警示天數；須由實際品項主檔與組織政策確認。
 4. Agent 是否相較 B0/B1 提升 macro-F1、evidence coverage 或降低錯誤自動通過率；所有結果均待實驗。

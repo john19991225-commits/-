@@ -1,7 +1,8 @@
 # Smart Warehouse AI Agent — Proposal Presentation
 
 > 建議頁數：18 頁｜建議時間：15–18 分鐘  
-> 狀態：可轉換的 Markdown 投影片原始內容；目前工作區未配置 PPTX 匯出工具，因此未直接產生 `.pptx`。可後續用 Marp、Pandoc 或人工貼入 PowerPoint。  
+> 狀態：已製作正式 18 頁 PPTX，並以 Microsoft PowerPoint 2024 成功渲染為 PDF。下載：[PPTX](presentations/Smart_Warehouse_AI_Agent_Proposal.pptx)｜[PDF](presentations/Smart_Warehouse_AI_Agent_Proposal.pdf)。本檔保留逐頁內容與講稿來源。
+
 > 所有實驗結果均為 **Not Run / Expected Outcomes**，不得在口頭報告中說成已觀測成果。
 
 ---
@@ -293,14 +294,10 @@
 
 ---
 
-## Export Notes
+## Export and Validation Notes
 
-本環境未配置可直接輸出 PPTX 的工具，因此目前只建立可編輯 Markdown。建議轉換方式：
-
-```text
-Marp:   proposal_slides.md → HTML/PDF/PPTX（需另行安裝並人工檢查版面）
-Pandoc: proposal_slides.md → PPTX（需 reference.pptx 才能維持校系格式）
-Manual: 依每頁分隔線貼入 PowerPoint，使用 architecture/flowchart 的 Mermaid 匯出圖
-```
-
-任何自動轉檔後仍需人工檢查中文字型、表格溢出、引用字級、色彩對比與講稿備註。
+- 產生工具：`python-pptx`；可重現腳本為 `scripts/build_proposal_pptx.py`。
+- 架構圖與流程圖以 PowerPoint 原生 shapes/connectors 重繪，可在 PowerPoint 中編輯；不是把 Markdown 文字整頁貼入。
+- 2026-10-31 已由 Microsoft PowerPoint 2024 開啟並匯出 18 頁 PDF，確認檔案可渲染。
+- 投影片仍保留「組員、課程、指導教師」人工填寫欄位；正式口試前需依課程資料補齊。
+- 正式實驗未執行，簡報內所有結果均標示 `Not Run` 或 `Expected Outcomes`。

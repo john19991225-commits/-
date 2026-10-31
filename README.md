@@ -501,45 +501,45 @@ Task Completion = Cases meeting all completion criteria / All assigned cases
 <a id="references"></a>
 # 7. References
 
-[1] Sun, H., Li, Y., Deng, Y., Wang, B., Deng, D., Zhang, S., and Zhang, H. (2025). “DocAgent: An Agentic Framework for Multi-Modal Long-Context Document Understanding.” *Proceedings of EMNLP 2025*. [https://doi.org/10.18653/v1/2025.emnlp-main.1638](https://doi.org/10.18653/v1/2025.emnlp-main.1638)
+[1] Sun, L., He, L., Jia, S., He, Y., and You, C. (2025). “DocAgent: An Agentic Framework for Multi-Modal Long-Context Document Understanding.” *Proceedings of EMNLP 2025*, 17701–17716. [https://doi.org/10.18653/v1/2025.emnlp-main.893](https://doi.org/10.18653/v1/2025.emnlp-main.893)
 
-[2] Li, Y., Conen, W., and Aller, C. (2025). “AID-Agent: Agentic AI for Intelligent Document Processing.” *Proceedings of REALM 2025*. [https://doi.org/10.18653/v1/2025.realm-1.6](https://doi.org/10.18653/v1/2025.realm-1.6)
+[2] Li, B., Conen, J., and Aller, F. (2025). “AID-Agent: An LLM-Agent for Advanced Extraction and Integration of Documents.” *Proceedings of REALM 2025*, 80–88. [https://doi.org/10.18653/v1/2025.realm-1.6](https://doi.org/10.18653/v1/2025.realm-1.6)
 
-[3] Principe, C., et al. (2025). “LLM-based Information Extraction: Approaches and Comparisons with Rule-based Methods in Real Estate Auctions.” *Proceedings of ACL 2025*. [https://aclanthology.org/2025.acl-long.572/](https://aclanthology.org/2025.acl-long.572/)
+[3] Principe, R. A., Viviani, M., and Chiarini, N. (2025). “Enhancing Information Extraction with Large Language Models: A Comparison with Human Annotation and Rule-Based Methods in a Real Estate Case Study.” *Proceedings of the 5th Conference on Language, Data and Knowledge*, 243–254. [https://aclanthology.org/2025.ldk-1.25/](https://aclanthology.org/2025.ldk-1.25/) (ACL metadata 未列 DOI。)
 
 [4] Huang, Z., Chen, K., He, J., Bai, X., Karatzas, D., Lu, S., and Jawahar, C. V. (2019). “ICDAR2019 Competition on Scanned Receipt OCR and Information Extraction.” *ICDAR 2019*. [https://doi.org/10.1109/ICDAR.2019.00244](https://doi.org/10.1109/ICDAR.2019.00244)
 
 [5] Mathew, M., Karatzas, D., and Jawahar, C. V. (2021). “DocVQA: A Dataset for VQA on Document Images.” *WACV 2021*. [https://doi.org/10.1109/WACV48630.2021.00225](https://doi.org/10.1109/WACV48630.2021.00225)
 
-[6] Puga Mendoza, E. A., Caballero Chávez, G. A., and Torres Mendoza, R. J. (2025). “Internet of Things (IoT) Applied to Warehouse and Inventory Management: A Systematic Literature Review.” *Journal of Infrastructure, Policy and Development, 9*(2), 10736. [https://doi.org/10.24294/jipd10736](https://doi.org/10.24294/jipd10736)
+[6] Puga Mendoza, A., Caballero Chávez, J. L., and Torres Mendoza, R. (2025). “Applications and Methodologies of Internet of Things in Warehouses and Inventory Management: A Systematic Literature Review.” *Procedia Computer Science, 253*, 1236–1245. [https://doi.org/10.1016/j.procs.2025.01.185](https://doi.org/10.1016/j.procs.2025.01.185)
 
-[7] “Research on abnormal inventory detection algorithm in warehouse management system.” (2025). *IEEE conference paper*. [https://doi.org/10.1109/ICAICA68455.2025.11120502](https://doi.org/10.1109/ICAICA68455.2025.11120502). **證據限制：目前僅核對出版者摘要與 metadata；作者、全文方法、資料切分及泛化結果待查證。**
+[7] Xu, C., Zhao, W., and Fu, Z. (2025). “Research on Abnormal Inventory Detection Algorithm in Warehouse Management System.” *2025 International Conference on Artificial Intelligence and Engineering Management (ICAIEM)*. [https://doi.org/10.1109/ICAIEM66060.2025.11139221](https://doi.org/10.1109/ICAIEM66060.2025.11139221). **證據限制：作者、題名、年份與 DOI 已由 DOI registry 核對；僅取得摘要／metadata，未宣稱已閱讀全文，資料切分及泛化結果待查證。**
 
-[8] Rad, F. F., Oghazi, P., Onur, I., and Hultman, M. (2025). “AI-powered batch order picking: efficiency, challenges, and success factors in warehouse operations.” *The International Journal of Logistics Management*. [https://doi.org/10.1108/IJLM-11-2023-0478](https://doi.org/10.1108/IJLM-11-2023-0478)
+[8] Fakhrai Rad, F., Oghazi, P., Onur, İ., and Kordestani, A. (2025). “Adoption of AI-Based Order Picking in Warehouse: Benefits, Challenges, and Critical Success Factors.” *Review of Managerial Science, 19*, 3495–3540. [https://doi.org/10.1007/s11846-025-00858-1](https://doi.org/10.1007/s11846-025-00858-1)
 
-[9] El Kadmiri, S., El Kadmiri, Z., Sy, O., and Koura, B. M. (2026). “Intelligent warehousing in Industry 4.0: A comprehensive framework of technologies, performance, and human-centric challenges.” *Modern Supply Chain Research and Applications, 8*(2), 241–279. [https://doi.org/10.1108/MSCRA-07-2025-0033](https://doi.org/10.1108/MSCRA-07-2025-0033)
+[9] El Kadmiri, W., Benghabrit, A., Nait Sidi Moh, A., and Moufaddal, M. (2026). “Towards Resilient and Sustainable Smart Warehousing: A Systematic Literature Review and Multi-Dimensional Cross-Functional Framework.” *Cleaner Logistics and Supply Chain, 19*, 100340. [https://doi.org/10.1016/j.clscn.2026.100340](https://doi.org/10.1016/j.clscn.2026.100340)
 
-[10] GS1 AISBL. (2024). *GS1 Logistic Label Guideline, Release 1.3*. [https://ref.gs1.org/guidelines/logistic-label-guideline/](https://ref.gs1.org/guidelines/logistic-label-guideline/)
+[10] GS1. (2019). *GS1 Logistic Label Guideline, Release 1.3*. [https://ref.gs1.org/guidelines/logistic-label/1.3.0/](https://ref.gs1.org/guidelines/logistic-label/1.3.0/)
 
-[11] Mecalux. (2025). *2025 Survey: Warehouse digitalization and the rise of AI*. [https://www.mecalux.com/blog/warehouse-digitalization-survey-2025](https://www.mecalux.com/blog/warehouse-digitalization-survey-2025). **產業調查，非同儕審查研究。**
+[11] Michel, R. (2025). “2025 Warehouse/DC Operations Survey: Tech Adoption Marches On.” *Supply Chain Management Review*. [Original survey article](https://www.scmr.com/article/2025-warehouse-dc-operations-survey-tech-adoption-marches-on/inventory-management). **產業調查，n=101，非同儕審查且不可外推至全球。**
 
 [12] Tabassi, E. (2023). *Artificial Intelligence Risk Management Framework (AI RMF 1.0)*. NIST AI 100-1. [https://doi.org/10.6028/NIST.AI.100-1](https://doi.org/10.6028/NIST.AI.100-1)
 
-[13] Alam, K. M., Rahman, J. M., Butt, A. I. K., and Hasan, M. K. (2026). “AI-enhanced digital twin models for warehouse logistics: a systematic review.” *Discover Applied Sciences, 8*, 99. [https://doi.org/10.1007/s42452-025-08080-w](https://doi.org/10.1007/s42452-025-08080-w)
+[13] Alam, M. M., Reimbaev Azizbek Nurkat Ugli, Tanha, K. J., and Jun, T. (2026). “AI-Enhanced Digital Twin Systems for Warehouse Logistics Optimization: A Review of Challenges with Solutions and Future Directions.” *ICT Express, 12*(2), 459–479. [https://doi.org/10.1016/j.icte.2026.01.009](https://doi.org/10.1016/j.icte.2026.01.009)
 
 [14] Autio, C., et al. (2024). *Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile*. NIST AI 600-1. [https://doi.org/10.6028/NIST.AI.600-1](https://doi.org/10.6028/NIST.AI.600-1)
 
 [15] DeHoratius, N., and Raman, A. (2008). “Inventory Record Inaccuracy: An Empirical Analysis.” *Management Science, 54*(4), 627–641. [https://doi.org/10.1287/mnsc.1070.0789](https://doi.org/10.1287/mnsc.1070.0789)
 
-[16] Hardgrave, B. C., Goyal, S., and Aloysius, J. A. (2011). “Improving Inventory Management in the Retail Store: The Effectiveness of RFID Tagging across Product Categories.” *Operations Management Research, 4*, 6–13. [https://doi.org/10.1007/s12063-011-0049-3](https://doi.org/10.1007/s12063-011-0049-3)
+[16] Hardgrave, B. C., Aloysius, J. A., and Goyal, S. (2013). “RFID-Enabled Visibility and Retail Inventory Record Inaccuracy: Experiments in the Field.” *Production and Operations Management, 22*(4), 843–856. [https://doi.org/10.1111/poms.12010](https://doi.org/10.1111/poms.12010)
 
-[17] Destro, I. R., Staudt, F. H., Somensi, K., and Taboada Rodriguez, C. M. (2023). “Inventory record inaccuracy: a systematic literature review and future research directions.” *European Journal of Operational Research, 308*(3), 1049–1065. [https://doi.org/10.1016/j.ejor.2022.10.037](https://doi.org/10.1016/j.ejor.2022.10.037)
+[17] Destro, I. R., Staudt, F. H., Somensi, K., and Taboada, C. (2023). “The Impacts of Inventory Record Inaccuracy and Cycle Counting on Distribution Center Performance.” *Production, 33*, e20220077. [https://doi.org/10.1590/0103-6513.20220077](https://doi.org/10.1590/0103-6513.20220077)
 
-[18] Rao, U. S., Ellis, B. A., Goldsby, T. J., and Raju, J. (2017). “Inventory sharing and inventory record inaccuracy.” *Decision Sciences, 48*(6), 1178–1202. [https://doi.org/10.1111/deci.12260](https://doi.org/10.1111/deci.12260)
+[18] Rao, S., Ellis, S. C., Goldsby, T. J., and Raju, D. (2019). “On the ‘Invisible Inventory Conundrum’ in RFID-Equipped Supply Chains: A Data Science Approach to Assessing Tag Performance.” *Journal of Business Logistics*. [https://doi.org/10.1111/jbl.12232](https://doi.org/10.1111/jbl.12232)
 
 [19] Bertolini, M., Bottani, E., Romagnoli, G., and Vignali, G. (2015). “The impact of RFID technologies on inventory accuracy in the apparel retailing: Evidence from the field.” *International Journal of RF Technologies, 6*(4), 225–246. [https://doi.org/10.3233/RFT-150069](https://doi.org/10.3233/RFT-150069)
 
-[20] Barratt, M., Kull, T. J., and Sodero, A. C. (2018). “Inventory record inaccuracy dynamics and the role of employees within multi-channel distribution center inventory systems.” *Journal of Operations Management, 63*, 6–24. [https://doi.org/10.1016/j.jom.2018.09.003](https://doi.org/10.1016/j.jom.2018.09.003)
+[20] Barratt, M., Kull, T. J., and Sodero, A. C. (2018). “Inventory Record Inaccuracy Dynamics and the Role of Employees within Multi-Channel Distribution Center Inventory Systems.” *Journal of Operations Management, 63*, 6–24. [https://doi.org/10.1016/j.jom.2018.09.003](https://doi.org/10.1016/j.jom.2018.09.003)
 
 [21] Chuang, H. H.-C., and Oliva, R. (2015). “Inventory record inaccuracy: Causes and labor effects.” *Journal of Operations Management, 39–40*, 63–78. [https://doi.org/10.1016/j.jom.2015.07.006](https://doi.org/10.1016/j.jom.2015.07.006)
 
@@ -554,8 +554,10 @@ Task Completion = Cases meeting all completion criteria / All assigned cases
 |---|---|
 | Proposal Document | [proposal.md](proposal.md) |
 | Deep Research full notes | [deep_research.md](deep_research.md) |
-| Proposal PPTX | **Not Yet Available** |
+| Proposal PPTX（正式 18 頁，可直接下載） | [presentations/Smart_Warehouse_AI_Agent_Proposal.pptx](presentations/Smart_Warehouse_AI_Agent_Proposal.pptx) |
+| Proposal PDF（渲染驗證與預覽） | [presentations/Smart_Warehouse_AI_Agent_Proposal.pdf](presentations/Smart_Warehouse_AI_Agent_Proposal.pdf) |
 | Convertible slide source (18 slides) | [proposal_slides.md](proposal_slides.md) |
+| Reproducible PPTX build script | [scripts/build_proposal_pptx.py](scripts/build_proposal_pptx.py) |
 | Full technical design | [DESIGN.md](DESIGN.md) |
 | Architecture / Flowchart / Algorithm | [architecture.md](architecture.md) · [flowchart.md](flowchart.md) · [algorithm.md](algorithm.md) |
 | Experimental protocol / empty result tables | [experiments.md](experiments.md) |
